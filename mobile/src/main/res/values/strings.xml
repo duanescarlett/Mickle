@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Mickle</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_test">TestActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next">Next</string>
+
+    <string-array name="account_type">
+        <item>Checking</item>
+        <item>Saving</item>
+        <item>Cash</item>
+        <item>Investment</item>
+    </string-array>
+
+</resources>
