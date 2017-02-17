@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.root.mickle.Communicator;
-import com.example.root.mickle.Overhead;
 import com.example.root.mickle.R;
-import com.example.root.mickle.db.Db_Helper;
+import com.example.root.mickle.models.Profile;
 
 public class Create_user extends Fragment {
 
-    Db_Helper db_helper;
     EditText name;
     EditText income;
     Button btnSubmit;
     Communicator communicator;
+
+    Profile profile_Tb;
 
     public Create_user() {
         // Required empty public constructor
@@ -46,7 +45,7 @@ public class Create_user extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db_helper = new Db_Helper(getActivity());
+
     }
 
     @Override
@@ -59,22 +58,24 @@ public class Create_user extends Fragment {
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String s = name.getText().toString();
                 String t = income.getText().toString();
 
                 float num = Float.parseFloat(t);
-                if(db_helper.insertProfile(s, num) != -1){
-                    communicator.onDialogMessage(s, Create_user.this);
-                }
-                else {
-                    Overhead.message(getActivity(), "The insert failed");
-                }
+
+                // Create profile
+                Create_user.this.profile_Tb = new Profile(s, num);
+
+                // Return to main activity
 
             }
         });
+
         return view;
+
     }
 
 }

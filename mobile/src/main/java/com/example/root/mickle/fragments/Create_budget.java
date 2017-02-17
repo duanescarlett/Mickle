@@ -15,13 +15,9 @@ import android.widget.Spinner;
 
 import com.example.root.mickle.Communicator;
 import com.example.root.mickle.R;
-import com.example.root.mickle.db.Db_Helper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 
 public class Create_budget extends Fragment implements AdapterView.OnItemSelectedListener{
@@ -31,7 +27,6 @@ public class Create_budget extends Fragment implements AdapterView.OnItemSelecte
     EditText txtAmount;
     Button btnCreateBudget;
     Communicator communicator;
-    Db_Helper db_helper;
 
     private List<String> dynamicListItems;
 
@@ -54,8 +49,6 @@ public class Create_budget extends Fragment implements AdapterView.OnItemSelecte
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //db_helper = new Db_Helper(getActivity());
-        db_helper = new Db_Helper(getActivity());
     }
 
     @Override
@@ -72,15 +65,14 @@ public class Create_budget extends Fragment implements AdapterView.OnItemSelecte
 
         dynamicListItems = new ArrayList<String>();
 
-        // Get a set of entries
-        Set set =  db_helper.getAccountData().entrySet();
+        // Get the different types of accounts
 
         // Get an iterator
-        Iterator i = set.iterator();
+
         // Get each element
-        while(i.hasNext()) {
-            dynamicListItems.add(i.next().toString());
-        }
+//        while(i.hasNext()) {
+//            dynamicListItems.add(i.next().toString());
+//        }
 
         // Creating adapter for spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dynamicListItems);
@@ -94,7 +86,8 @@ public class Create_budget extends Fragment implements AdapterView.OnItemSelecte
                 String name = Create_budget.this.txtName.getText().toString();
                 String amount = Create_budget.this.txtAmount.getText().toString();
                 float num = Float.parseFloat(amount); // Convert string to float
-                db_helper.insertBudget(name, num, "CASH");
+
+                // Create the budget
             }
         });
         return v;

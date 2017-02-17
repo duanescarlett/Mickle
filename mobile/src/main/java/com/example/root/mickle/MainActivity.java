@@ -8,24 +8,23 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-import com.example.root.mickle.db.Db_Helper;
 import com.example.root.mickle.fragments.AccountList;
 import com.example.root.mickle.fragments.BudgetList;
 import com.example.root.mickle.fragments.CashInput;
-
 import com.example.root.mickle.fragments.Create_acc;
 import com.example.root.mickle.fragments.Create_user;
+import com.example.root.mickle.models.Profile;
 
 public class MainActivity extends AppCompatActivity implements Communicator {
 
     private Toolbar toolbar;
-    private Db_Helper db;
     private CashInput cashInput;
+    private Profile profileTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +43,8 @@ public class MainActivity extends AppCompatActivity implements Communicator {
             }
         });
 
-        db = new Db_Helper(this);
         // Run a query to see if the user exists
-        checkUserExistence(db);
+        //checkUserExistence(db);
 
     }
 
@@ -58,13 +56,12 @@ public class MainActivity extends AppCompatActivity implements Communicator {
         transaction.commit();
     }
 
-    public void checkUserExistence(Db_Helper db){
-        String data = db.getProfileData();
+    public void checkUserExistence(){
 
-        if(data == "")
-            addUser();
-        else
-            Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
+//        if(data == "")
+//            addUser();
+//        else
+//            Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
 
     }
 

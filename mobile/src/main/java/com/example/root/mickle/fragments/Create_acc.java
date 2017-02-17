@@ -17,12 +17,9 @@ import android.widget.Toast;
 
 import com.example.root.mickle.Communicator;
 import com.example.root.mickle.R;
-import com.example.root.mickle.db.Db_Helper;
-
 
 public class Create_acc extends Fragment implements AdapterView.OnItemSelectedListener{
 
-    Db_Helper db_helper;
     EditText name;
     Spinner accType;
     EditText amount;
@@ -50,7 +47,6 @@ public class Create_acc extends Fragment implements AdapterView.OnItemSelectedLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db_helper = new Db_Helper(getActivity());
     }
 
     @Override
@@ -80,7 +76,7 @@ public class Create_acc extends Fragment implements AdapterView.OnItemSelectedLi
 
                 float num = Float.parseFloat(amount); // Convert string to float
 
-                db_helper.insertAccount(name, accType, num);
+                // Create the account
 
                 // Tell activity to kill fragment
                 communicator.onDialogMessage("null", Create_acc.this);

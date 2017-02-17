@@ -1,4 +1,4 @@
-package com.example.root.mickle.db;
+package com.example.root.mickle.models;
 
 import android.provider.BaseColumns;
 
