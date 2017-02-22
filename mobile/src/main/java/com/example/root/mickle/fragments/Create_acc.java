@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.root.mickle.Communicator;
 import com.example.root.mickle.R;
+import com.example.root.mickle.models.Account;
 
 public class Create_acc extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -25,6 +26,8 @@ public class Create_acc extends Fragment implements AdapterView.OnItemSelectedLi
     EditText amount;
     Button btnSubmit;
     Communicator communicator;
+
+    Account account;
 
     @Override
     public void onAttach(Context context){
@@ -77,9 +80,21 @@ public class Create_acc extends Fragment implements AdapterView.OnItemSelectedLi
                 float num = Float.parseFloat(amount); // Convert string to float
 
                 // Create the account
+                Create_acc.this.account = new Account(name, accType, num);
+                Create_acc.this.account.save();
 
                 // Tell activity to kill fragment
                 communicator.onDialogMessage("null", Create_acc.this);
+
+                // Distroy the account list frag
+                getFragmentManager().beginTransaction().remove(Create_acc.this).commit();
+
+                // Create the form for a new account
+//                Create_budget frag = new Create_budget();
+//                FragmentManager manager = getFragmentManager();
+//                FragmentTransaction transaction = manager.beginTransaction();
+//                transaction.add(R.id.my_layout, frag, "Account creator");
+//                transaction.commit();
 
             }
 

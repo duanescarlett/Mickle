@@ -68,9 +68,11 @@ public class Create_user extends Fragment {
 
                 // Create profile
                 Create_user.this.profile_Tb = new Profile(s, num);
+                Create_user.this.profile_Tb.save();
 
                 // Return to main activity
-
+                // Distroy the Create_user frag
+                getFragmentManager().beginTransaction().remove(Create_user.this).commit();
             }
         });
 
